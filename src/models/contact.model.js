@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 
+
 let Schema = mongoose.Schema;
 
 let ContactSchema = new Schema({
@@ -11,4 +12,11 @@ let ContactSchema = new Schema({
   deleteAt: { type: Number, default: null },
 });
 
-module.export = mongoose.model("contact", ContactSchema);
+ContactSchema.statics = {
+  createNew(item){
+    return this.create(item);
+  }
+}
+
+
+module.exports = mongoose.model("contact", ContactSchema);

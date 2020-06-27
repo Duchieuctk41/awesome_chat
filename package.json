@@ -18,7 +18,8 @@
   },
   "homepage": "https://github.com/Duchieuctk41/awesome_chat#readme",
   "dependencies": {
-    "express": "^4.17.1",
+    "bluebird": "^3.5.3",
+    "express": "^4.16.4",
     "mongoose": "^4.13.9"
   },
   "devDependencies": {
