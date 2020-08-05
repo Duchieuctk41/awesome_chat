@@ -20,7 +20,7 @@
   "dependencies": {
     "bluebird": "^3.5.3",
     "express": "^4.16.4",
-    "mongoose": "^4.13.9"
+    "mongoose": "^5.7.5"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
