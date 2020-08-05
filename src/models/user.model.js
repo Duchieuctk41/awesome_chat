@@ -30,4 +30,4 @@ facebook: {
   deleteAt: { type: Number, default: null },
 });
 
-module.export = mongoose.model("user", UserSchema);
+module.exports = mongoose.model("user", UserSchema);
