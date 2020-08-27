@@ -80,14 +80,30 @@ $(document).ready(function() {
             url: "/user/update-avatar",
             type: "put",
             cache: false,
-            contenType: false,
+            contentType: false,
             processData: false,
             data: userAvatar,
             success: function(result) {
-                //
+                 // Display success
+                $(".user-modal-alert-success").find("span").text(result.message);
+                $(".user-modal-alert-success").css("display", "block");
+
+                // Update avatar at navbar
+                $("#navbar-avatar").attr("src", result.imageSrc);
+
+                // Update avatar origin src
+                originAvatarSrc = result.imageSrc;
+
+                // Reset all
+                $("#input-btn-cancel-update-user").click();
             },
             error: function(error) {
-                //
+                // Display errors
+                $(".user-modal-alert-error").find("span").text(error.responseText);
+                $(".user-modal-alert-error").css("display", "block");
+
+                // Reset all
+                $("#input-btn-cancel-update-user").click();
             },
         });
         // console.log(userAvatar);
@@ -97,6 +113,7 @@ $(document).ready(function() {
     $("#input-btn-cancel-update-user").bind("click", function() {
         userAvatar = null;
         userInfo = {};
+        $("#input-change-avatar").val(null);
         $("#user-modal-avatar").attr("src", originAvatarSrc);
     });
 })
