@@ -2,7 +2,11 @@ export const transValidation = {
 email_incorrect: "Email phai co dang example@gmail.com!",
 gender_incorrect: "Bede phai hong tar??",
 password_incorrect: "Mat khau phai gom 8 ky tu, bao gom chu hoa, chu thuong, chu so va ky tu dac biet.",
-password_confirmation_incorrect: "Nhap lai mat khau chua chinh xac!"
+password_confirmation_incorrect: "Nhap lai mat khau chua chinh xac!",
+update_username: "Username gioi han trong khoang 3-17 ky tu, và không được có ký tự đặc biệt.",
+update_gender: "Có phải bạn là giới tính thứ 3?",
+update_address: "Địa chỉ giới hạn trong khoảng 3-30 ký tự.",
+update_phone: "Số điện thoại Việt Nam bắt đầu bằng số 0, giới hạn từ 10-11 ký tự."
 };
 
 export const transErrors = {
@@ -25,7 +29,7 @@ export const transSuccess = {
         return `Xin chao ${username}, chuc ban mot ngay tot lanh.`
     },
     logout_success: "Dang xuat tai khoan thanh cong, hen gap lai.",
-    avatar_updated: "Cap nhat anh dai dien thanh cong"
+    user_info_updated: "Cap nhat thong tin nguoi dung thanh cong."
 };
 
 export const transMail = {
