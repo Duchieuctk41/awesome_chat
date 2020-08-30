@@ -13,11 +13,13 @@ export const transErrors = {
     account_in_use: "user nay da duoc su dung.",
     account_removed: "tai khoan nay da bi go khoi he thong, neu day la hieu lam, vui long lien he bo phan ho tro cua chung toi.",
     account_not_active: "Email da dang ky nhung chua duoc Active tai khoan, vui long kiem tra email hoac lien he voi bo phan ho tro cua chung toi.",
+    account_undefined: "Tài khoản này không tồn tại.",
     token_undefine: "token khong ton tai!",
     login_failed: "Sai tai khoan hoac mat khau!",
     server_error: "Co loi phia server, lien he voi bo phan ho tro de bao cao loi nay, xin cam on.",
     avatar_type: "Kieu file khong hop le, chi chap nhan png, jpg hay jpeg",
-    avatar_size: "Anh upload toi da cho phep la 1MB"
+    avatar_size: "Anh upload toi da cho phep la 1MB",
+    user_current_password_failed: "Mật khẩu hiện tại không chính xác."
 };
 
 export const transSuccess = {
@@ -29,7 +31,8 @@ export const transSuccess = {
         return `Xin chao ${username}, chuc ban mot ngay tot lanh.`
     },
     logout_success: "Dang xuat tai khoan thanh cong, hen gap lai.",
-    user_info_updated: "Cap nhat thong tin nguoi dung thanh cong."
+    user_info_updated: "Cap nhat thong tin nguoi dung thanh cong.",
+    user_password_updated: "Cập nhật mật khẩu thành công."
 };
 
 export const transMail = {
