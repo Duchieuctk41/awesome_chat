@@ -6,7 +6,8 @@ password_confirmation_incorrect: "Nhap lai mat khau chua chinh xac!",
 update_username: "Username gioi han trong khoang 3-17 ky tu, và không được có ký tự đặc biệt.",
 update_gender: "Có phải bạn là giới tính thứ 3?",
 update_address: "Địa chỉ giới hạn trong khoảng 3-30 ký tự.",
-update_phone: "Số điện thoại Việt Nam bắt đầu bằng số 0, giới hạn từ 10-11 ký tự."
+update_phone: "Số điện thoại Việt Nam bắt đầu bằng số 0, giới hạn từ 10-11 ký tự.",
+keyword_find_user: "Lỗi từ khóa tìm kiếm, chỉ cho phép chữ cái, số hay khoảng trống."
 };
 
 export const transErrors = {
