@@ -15,8 +15,21 @@ let ContactSchema = new Schema({
 ContactSchema.statics = {
   createNew(item){
     return this.create(item);
+  },
+
+  /**
+   * Find all items that related with user.
+   * @param {string} userId 
+   */
+  findAllByUser(userId) {
+    return this.find({
+      $or: [
+        {"userId": userId},
+        {"contactId": userId},
+      ]
+    }).exec();
   }
-}
+};
 
 
 module.exports = mongoose.model("contact", ContactSchema);
