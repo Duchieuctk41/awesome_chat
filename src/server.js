@@ -4,17 +4,26 @@ import configviewEngine from "./config/viewEngine";
 import initRoutes from "./routes/web";
 import bodyParser from "body-parser";
 import connectFlash from "connect-flash";
-import configSession from "./config/session";
+import session from "./config/session";
 import passport from "passport";
+import http from "http";
+import socketio from "socket.io";
+import initSockets from "./sockets/index";
+import cookieParser from "cookie-parser";
+import configSocketIo from "./config/socketio";
 
    //Init app
    let app = express();
+
+   //Init server with socket.io & express app
+   let server = http.createServer(app);
+   let io = socketio(server);
 
    //Connect to Mongodb
    ConnectDB();
    
    //Config session
-   configSession(app);
+   session.config(app);
    
    //Config view engine
    configviewEngine(app);
@@ -24,15 +33,24 @@ import passport from "passport";
    
    // Enable flash messages
    app.use(connectFlash());
+
+   // User Cookie Parser
+   app.use(cookieParser());
    
-   //Config passport js
+   // Config passport js
    app.use(passport.initialize());
    app.use(passport.session());
+
+   // Config for socket.io
+   configSocketIo(io, cookieParser, session.sessionStore);
    
-   //Init all routes
+   // Init all routes
    initRoutes(app);
+
+   // Init all sockets
+   initSockets(io);
      
-app.listen(process.env.APP_PORT, process.env.APP_HOST, ()=>{
+server.listen(process.env.APP_PORT, process.env.APP_HOST, ()=>{
 console.log(`Server is listening ${process.env.APP_HOST}: ${process.env.APP_PORT}`);
 });
 
