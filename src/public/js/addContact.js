@@ -13,7 +13,7 @@ function addContact() {
 }
 
 socket.on("response-add-new-contact", function(user) {
-    let notif = `<div class="notif-reader-false" data-uid="${user.id}">
+    let notif = `<div class="notif-readed-false" data-uid="${user.id}">
                     <img class="avatar-small" src="images/users/${user.avatar}" alt=""> 
                     <strong>${user.username}</strong> đã gửi cho bạn một lời mời kết bạn!
                 </div>`;
@@ -22,6 +22,6 @@ socket.on("response-add-new-contact", function(user) {
     
     increaseNumberNotifContact("count-request-contact-received");
 
-    increaseNumberNotification("noti_contact_counter");
-    increaseNumberNotification("noti_counter");
+    increaseNumberNotification("noti_contact_counter", 1);
+    increaseNumberNotification("noti_counter", 1);
 });
