@@ -63,9 +63,9 @@ let getContacts = (currentUserId) => {
             let contacts = await ContactModel.getContacts(currentUserId, LIMIT_NUMBER_TAKEN);
             let users = contacts.map(async (contact) => {
                 if (contact.contactId == currentUserId) {
-                    return await UserModel.findUserById(contact.userId);
+                    return await UserModel.getNomalUserDataById(contact.userId);
                 } else {
-                    return await UserModel.findUserById(contact.contactId);
+                    return await UserModel.getNomalUserDataById(contact.contactId);
                 }                
             });
 
@@ -81,7 +81,7 @@ let getContactsSent = (currentUserId) => {
         try {
             let contacts = await ContactModel.getContactsSent(currentUserId, LIMIT_NUMBER_TAKEN);
             let users = contacts.map(async (contact) => {
-                return await UserModel.findUserById(contact.contactId);
+                return await UserModel.getNomalUserDataById(contact.contactId);
             });
 
             resolve(await Promise.all(users));
@@ -96,7 +96,7 @@ let getContactsReceived = (currentUserId) => {
         try {
             let contacts = await ContactModel.getContactsReceived(currentUserId, LIMIT_NUMBER_TAKEN);
             let users = contacts.map(async (contact) => {
-                return await UserModel.findUserById(contact.userId);
+                return await UserModel.getNomalUserDataById(contact.userId);
             });
 
             resolve(await Promise.all(users));
@@ -139,6 +139,73 @@ let countAllContactsReceived = (currentUserId) => {
     });
 };
 
+/**
+ * Read more contacts, max 10 items one time
+ * @param {string} currentUserId 
+ * @param {number} skipNumberContacts 
+ */
+let readMoreContacts = (currentUserId, skipNumberContacts) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let newContacts = await ContactModel.readMoreContacts(currentUserId, skipNumberContacts, LIMIT_NUMBER_TAKEN);
+            
+            let users = newContacts.map(async (contact) => {
+                if (contact.contactId == currentUserId) {
+                    return await UserModel.getNomalUserDataById(contact.userId);
+                } else {
+                    return await UserModel.getNomalUserDataById(contact.contactId);
+                }  
+            });
+
+            resolve(await Promise.all(users));
+        } catch (error) {
+            reject(error);
+        }
+    });
+};
+
+/**
+ * Read more contacts received, max 10 items one time
+ * @param {string} currentUserId 
+ * @param {number} skipNumberContacts 
+ */
+let readMoreContactsReceived = (currentUserId, skipNumberContacts) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let newContacts = await ContactModel.readMoreContactsReceived(currentUserId, skipNumberContacts, LIMIT_NUMBER_TAKEN);
+            
+            let users = newContacts.map(async (contact) => {
+                return await UserModel.getNomalUserDataById(contact.userId);
+            });
+
+            resolve(await Promise.all(users));
+        } catch (error) {
+            reject(error);
+        }
+    });
+};
+
+/**
+ * Read more contacts sent, max 10 items one time
+ * @param {string} currentUserId 
+ * @param {number} skipNumberContacts 
+ */
+let readMoreContactsSent = (currentUserId, skipNumberContacts) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let newContacts = await ContactModel.readMoreContactsSent(currentUserId, skipNumberContacts, LIMIT_NUMBER_TAKEN);
+            
+            let users = newContacts.map(async (contact) => {
+                return await UserModel.getNomalUserDataById(contact.contactId);
+            });
+
+            resolve(await Promise.all(users));
+        } catch (error) {
+            reject(error);
+        }
+    });
+};
+
 module.exports = {
     findUsersContact: findUsersContact,
     addNew: addNew,
@@ -148,5 +215,9 @@ module.exports = {
     getContactsReceived: getContactsReceived,
     countAllContacts: countAllContacts,
     countAllContactsSent: countAllContactsSent,
-    countAllContactsReceived: countAllContactsReceived
+    countAllContactsReceived: countAllContactsReceived,
+    readMoreContacts: readMoreContacts,
+    readMoreContactsSent: readMoreContactsSent,
+    readMoreContactsReceived: readMoreContactsReceived
+
 };
