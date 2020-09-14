@@ -1,6 +1,7 @@
 import addNewContact from "./contact/addNewContact";
 import removeRequestContactSent from "./contact/removeRequestContactSent";
-import removeRequestContactSentReceived from "./contact/removeRequestContactSentReceived";
+import removeRequestContactReceived from "./contact/removeRequestContactReceived";
+import approveRequestContactReceived from "./contact/approveRequestContactReceived";
 
 /**
  * @param io from socket.io library 
@@ -9,7 +10,8 @@ import removeRequestContactSentReceived from "./contact/removeRequestContactSent
 let initSockets = (io) => {
     addNewContact(io);
     removeRequestContactSent(io);
-    removeRequestContactSentReceived(io);
+    removeRequestContactReceived(io);
+    approveRequestContactReceived(io);
 };
 
 module.exports = initSockets;
