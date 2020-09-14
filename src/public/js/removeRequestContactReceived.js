@@ -1,4 +1,4 @@
-function removeRequestContactSentReceived() {
+function removeRequestContactReceived() {
     $(".user-remove-request-contact-received").unbind("click").on("click", function() {
         let targetId = $(this).data("uid");
         $.ajax({
@@ -39,5 +39,5 @@ socket.on("response-remove-request-contact-sent", function(user) {
 });
 
 $(document).ready(function() {
-    removeRequestContactSentReceived();
+    removeRequestContactReceived();
 });
