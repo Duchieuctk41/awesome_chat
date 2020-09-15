@@ -29,6 +29,9 @@ function approveRequestContactReceived() {
 
                     decreaseNumberNotifContact("noti_contact_counter", 1); // js/calculateNotification.js
 
+                    removeContact(); // js/removeContact.js
+                    // later when performing the chat function, will delete continue in the chat section
+                    
                     socket.emit("approve-request-contact-received", {contactId: targetId});
                 }
             }
@@ -37,7 +40,7 @@ function approveRequestContactReceived() {
 };
 
 
-socket.on("response-approve-request-contact-sent", function(user) {  
+socket.on("response-approve-request-contact-received", function(user) {  
     let notif = `<div class="notif-readed-false" data-uid="${user.id}">
                     <img class="avatar-small" src="images/users/${user.avatar}" alt=""> 
                     <strong>${user.username}</strong> đã chấp nhận lời mời kết bạn!
@@ -79,6 +82,9 @@ socket.on("response-approve-request-contact-sent", function(user) {
         </li>
     `;
     $("#contacts").find("ul").prepend(userInfoHtml);
+    
+    removeContact(); // js/removeContact.js
+    // later when performing the chat function, will delete continue in the chat section
 });
 
 $(document).ready(function() {
