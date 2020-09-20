@@ -1,5 +1,5 @@
 /**
- * Created by https://trungquandev.com's author on 25/02/2018.
+ * Created by https://facebook.com/duchieu.81699/'s author on 25/02/2018.
  */
 function showRegisterForm() {
     $('.loginBox').fadeOut('fast', function() {

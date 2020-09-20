@@ -20,9 +20,9 @@ Trong ứng dụng này có sử dụng những thư viện phía client với c
 Các bạn vui lòng làm theo hướng dẫn trong video của mình, sử dụng chính xác phiên bản của các thư viện này để tránh gặp những lỗi không đáng có nhé.
 Thank you so much!
 
-Author: Trung Quân
+Author: Đức Hiếu
 
-Blog: https://trungquandev.com/
+Blog: htpps://facebook.com/duchieu.81699
 
 CV: https://cv.trungquandev.com/
 
