@@ -10,9 +10,9 @@ let ChatGroupSchema = new Schema({
   members: [
     {userId: String}
   ],
-  createAt: { type: Number, default: Date.now },
-  updateAt: { type: Number, default: Date.now },
-  deleteAt: { type: Number, default: null },
+  createdAt: { type: Number, default: Date.now },
+  updatedAt: { type: Number, default: Date.now },
+  deletedAt: { type: Number, default: null },
 });
 
 ChatGroupSchema.statics = {
@@ -25,6 +25,22 @@ ChatGroupSchema.statics = {
     return this.find({
       "members": {$elemMatch: {"userId": userId}}
     }).sort({"updatedAt": -1}).limit(limit).exec();
+  },
+
+  getChatGroupById(id) {
+    return this.findById(id).exec();
+  },
+
+  /**
+   * Update group chat when has new message
+   * @param {stirng} id Of group chat
+   * @param {number} newMessageAmount 
+   */
+  updateWhenHasNewMessage(id, newMessageAmount) {
+    return this.findByIdAndUpdate(id, {
+      "messageAmount": newMessageAmount,
+      "updatedAt": Date.now()
+    }).exec();
   }
 };
 

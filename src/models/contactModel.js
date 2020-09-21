@@ -7,9 +7,9 @@ let ContactSchema = new Schema({
   userId: String,
   contactId: String,
   status: { type: Boolean, default: false },
-  createAt: { type: Number, default: Date.now },
-  updateAt: { type: Number, default: null },
-  deleteAt: { type: Number, default: null },
+  createdAt: { type: Number, default: Date.now },
+  updatedAt: { type: Number, default: null },
+  deletedAt: { type: Number, default: null },
 });
 
 ContactSchema.statics = {
@@ -254,6 +254,28 @@ ContactSchema.statics = {
       ]
     }).sort({"createdAt": -1}).skip(skip).limit(limit).exec();
   },
+
+  /**
+   * Update contact (chat personal) when has new message
+   * @param {string} userId Current user id
+   * @param {string} contactId Contact id
+   */
+  updateWhenHasNewMessage(userId, contactId) {
+    return this.update({
+      $or: [
+        {$and: [
+          {"userId": userId},
+          {"contactId": contactId}
+        ]},
+        {$and: [
+          {"userId": contactId},
+          {"contactId": userId}
+        ]}
+      ]
+    }, {
+      "updatedAt": Date.now()
+    }).exec();
+  }
 };
 
 
