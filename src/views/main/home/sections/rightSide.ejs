@@ -88,6 +88,7 @@
                     <div class="content-chat">
                         <div class="chat" data-chat="<%= conversation._id %>">
                             <% conversation.messages.forEach(function(message) { %>
+                                <span><%= message %></span>
                                 <% if (message.messageType === "text") { %>
                                     <div class="bubble <% if (message.senderId == user._id) { %> me <% } else { %> you <% } %>" data-mess-id="<%= message._id %>">
                                         <%= message.text %>
