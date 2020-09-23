@@ -20,19 +20,25 @@ function textAndEmojiChat(divId) {
 
             // Call send message
             $.post("/message/add-new-text-emoji", dataTextEmojiForSend, function(data) {
+                let dataToEmit = {
+                    message: data.message
+                };
+
                 // Step 01: Handle message data before show
                 let messageOfMe = $(`<div class="bubble me data-mess-id="${data.message._id}"></div>`);
-                if (dataTextEmojiForSend.isChatGroup) {
-                    messageOfMe.html(`<img src="/images/users/${data.message.sender.avatar}" class="avatar-small" title="${data.message.sender.name}">`);
-                    
-                    messageOfMe.text(data.message.text);
-                    increaseNumberMessageGroup(divId)
-                } else {
-                    messageOfMe.text(data.message.text);
-                }
-
+                messageOfMe.text(data.message.text);
                 let convertEmojiMessage = emojione.toImage(messageOfMe.html());
-                messageOfMe.html(convertEmojiMessage);
+
+                if (dataTextEmojiForSend.isChatGroup) {
+                    let senderAvatar = `<img src="/images/users/${data.message.sender.avatar}" class="avatar-small" title="${data.message.sender.name}" />`;
+                    messageOfMe.html(`${senderAvatar} ${convertEmojiMessage}`);
+
+                    increaseNumberMessageGroup(divId);
+                    dataToEmit.groupId = targetId;
+                } else {
+                    messageOfMe.html(convertEmojiMessage);
+                    dataToEmit.contactId = targetId;
+                }
 
                 // Step 02: Append message data to screen
                 $(`.right .chat[data-chat=${divId}]`).append(messageOfMe);
@@ -43,18 +49,19 @@ function textAndEmojiChat(divId) {
                 currentEmojioneArea.find(".emojionearea-editor").text("");
 
                 // Step 04: Change data preview & time in lefside
-                $(`.person[data-chat=${divId}]`).find("span.time").html(moment(data.message.createdAt).locale("vi").startOf("seconds").fromNow());
-                $(`.person[data-chat=${divId}]`).find("span.preview").html(emojione.toImage(data.message.text))
+                $(`.person[data-chat=${divId}]`).find("span.time").removeClass("message-time-realtime").html(moment(data.message.createdAt).locale("vi").startOf("seconds").fromNow());
+                $(`.person[data-chat=${divId}]`).find("span.preview").removeClass("message-time-realtime").html(emojione.toImage(data.message.text))
 
-                // Step 05: Move conversation to the top
-                $(`.person[data-chat=${divId}]`).on("click.moveConversationToTheTop", function() {
+                 // Step 05: Move conversation to the top
+                $(`.person[data-chat=${divId}]`).on("hieupencil.moveConversationToTheTop", function() {
                     let dataToMove = $(this).parent();
                     $(this).closest("ul").prepend(dataToMove);
-                    $(this).off("click.moveConversationToTheTop");
+                    $(this).off("hieupencil.moveConversationToTheTop");
                 });
-                $(`.person[data-chat=${divId}]`).click();
+                $(`.person[data-chat=${divId}]`).triger("hieupencil.moveConversationToTheTop"
 
                 // Step 06: Emit realtime
+                socket.emit("chat-text-emoji", dataToEmit);
                 
 
             }).fail(function(response) {
@@ -63,3 +70,53 @@ function textAndEmojiChat(divId) {
         }
     });
 };
+
+$(document).ready(function() {
+    socket.on("response-chat-text-emoji", function(respone) {
+        let divId = "";
+        // Step 01: Handle message data before show
+        let messageOfYou = $(`<div class="bubble you data-mess-id="${respone.message._id}"></div>`);
+        messageOfYou.text(respone.message.text);
+        let convertEmojiMessage = emojione.toImage(messageOfYou.html());
+
+        if (respone.currentGroupId) {
+            let senderAvatar = `<img src="/images/users/${respone.message.sender.avatar}" class="avatar-small" title="${data.message.sender.name}" />`;
+            messageOfYou.html(`${senderAvatar} ${convertEmojiMessage}`);
+
+            divId = respone.currentGroupId;
+
+            if (respone.currentUserId !== $("#dropdown-navbar-user").data("uid")) {
+                increaseNumberMessageGroup(divId);
+             }
+        } else {
+            messageOfYou.html(convertEmojiMessage);
+
+            divId = respone.currentUserId;
+        }
+
+         // Step 02: Append message data to screen
+         if (respone.currentUserId !== $("#dropdown-navbar-user").data("uid")) {
+            $(`.right .chat[data-chat=${divId}]`).append(messageOfYou);
+            nineScrollRight(divId);
+            $(`.person[data-chat=${divId}]`).find("span.time").addClass("message-time-realtime").
+         }
+         
+
+         // Step 03: Remove data at input: nothing to code :|
+
+        // Step 04: Change data preview & time in lefside
+        $(`.person[data-chat=${divId}]`).find("span.time").html(moment(respone.message.createdAt).locale("vi").startOf("seconds").fromNow());
+        $(`.person[data-chat=${divId}]`).find("span.preview").addClass("message-time-realtime").html(emojione.toImage(respone.message.text))
+
+        // Step 05: Move conversation to the top
+        $(`.person[data-chat=${divId}]`).on("hieupencil.moveConversationToTheTop", function() {
+            let dataToMove = $(this).parent();
+            $(this).closest("ul").prepend(dataToMove);
+            $(this).off("hieupencil.moveConversationToTheTop");
+        });
+        $(`.person[data-chat=${divId}]`).triger("hieupencil.moveConversationToTheTop");
+
+        // Step 06: Emit realtime: nothing to code :|
+
+    });
+});
