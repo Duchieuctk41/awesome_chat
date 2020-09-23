@@ -34,12 +34,12 @@ function updateUserInfo() {
         let limit = 1048576; // byte = 1MB
 
         if($.inArray(fileData.type, math) === -1) {
-            alertify.notify("Kieu file khong hop le, chi chap nhan png, jpg hay jpeg", "error", 7);
+            alertify.notify("Kiểu file không hợp lệ, chỉ chấp nhận png, jpg hay jpeg", "error", 7);
             $(this).val(null);
             return false;
         }
         if(fileData.size > limit) {
-            alertify.notify("Anh upload toi da cho phep la 1MB", "error", 7);
+            alertify.notify("Ảnh upload tối đa cho phép là 1MB", "error", 7);
             $(this).val(null);
             return false;
         }      
@@ -65,7 +65,7 @@ function updateUserInfo() {
 
             userAvatar = formData;
         } else {
-            alertify.notify("Trinh duyet cua ban khong ho tro FileReader", "error", 7);
+            alertify.notify("Trình duyệt của bạn không hỗ trợ FileReader", "error", 7);
         }
     });
 
@@ -73,7 +73,7 @@ function updateUserInfo() {
         let username = $(this).val();
         let regexUsername = new RegExp(/^[\s0-9a-zA-Z_ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹếẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ ]+$/);
         if (!regexUsername.test(username) || username.length < 3 || username.length > 17) {
-            alertify.notify("Username gioi han trong khoang 3-17 ky tu, và không được có ký tự đặc biệt.", "error", 7);
+            alertify.notify("Username giới hạn trong khoảng 3-17 ký tự, và không được có ký tự đặc biệt.", "error", 7);
             $(this).val(originUserInfo.username);
             delete userInfo.username;
             return false;
@@ -151,7 +151,7 @@ function updateUserInfo() {
         let regexPassword = new RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,}$/);
 
         if (!regexPassword.test(newPassword)) {
-            alertify.notify("Mat khau phai gom 8 ky tu, bao gom chu hoa, chu thuong, chu so va ky tu dac biet.", "error", 7);
+            alertify.notify("Mật khẩu phải gồm 8 ký tự, bao gồm chữ hoa, chữ thường, chữ số và ký tự đặc biệt.", "error", 7);
             $(this).val(null);
             delete userUpdatePassword.newPassword;
             return false;
