@@ -58,10 +58,19 @@ function textAndEmojiChat(divId) {
                     $(this).closest("ul").prepend(dataToMove);
                     $(this).off("hieupencil.moveConversationToTheTop");
                 });
-                $(`.person[data-chat=${divId}]`).triger("hieupencil.moveConversationToTheTop"
+                $(`.person[data-chat=${divId}]`).trigger("hieupencil.moveConversationToTheTop");
 
-                // Step 06: Emit realtime
+                // Step 06: Emit real-time
                 socket.emit("chat-text-emoji", dataToEmit);
+
+                // Step 07: Emit remove typing real-time
+                typingOff(divId);
+
+                //Step 08: If this has typing, remove that immediate
+                let checkTyping = $(`.chat[data-chat=${divId}]`).find("div.bubble-typing-gif");
+                if (checkTyping.length) {
+                    checkTyping.remove();
+                }
                 
 
             }).fail(function(response) {
@@ -72,41 +81,40 @@ function textAndEmojiChat(divId) {
 };
 
 $(document).ready(function() {
-    socket.on("response-chat-text-emoji", function(respone) {
+    socket.on("response-chat-text-emoji", function(response) {
         let divId = "";
         // Step 01: Handle message data before show
-        let messageOfYou = $(`<div class="bubble you data-mess-id="${respone.message._id}"></div>`);
-        messageOfYou.text(respone.message.text);
+        let messageOfYou = $(`<div class="bubble you data-mess-id="${response.message._id}"></div>`);
+        messageOfYou.text(response.message.text);
         let convertEmojiMessage = emojione.toImage(messageOfYou.html());
 
-        if (respone.currentGroupId) {
-            let senderAvatar = `<img src="/images/users/${respone.message.sender.avatar}" class="avatar-small" title="${data.message.sender.name}" />`;
+        if (response.currentGroupId) {
+            let senderAvatar = `<img src="/images/users/${response.message.sender.avatar}" class="avatar-small" title="${data.message.sender.name}" />`;
             messageOfYou.html(`${senderAvatar} ${convertEmojiMessage}`);
 
-            divId = respone.currentGroupId;
+            divId = response.currentGroupId;
 
-            if (respone.currentUserId !== $("#dropdown-navbar-user").data("uid")) {
+            if (response.currentUserId !== $("#dropdown-navbar-user").data("uid")) {
                 increaseNumberMessageGroup(divId);
              }
         } else {
             messageOfYou.html(convertEmojiMessage);
 
-            divId = respone.currentUserId;
+            divId = response.currentUserId;
         }
 
          // Step 02: Append message data to screen
-         if (respone.currentUserId !== $("#dropdown-navbar-user").data("uid")) {
+         if (response.currentUserId !== $("#dropdown-navbar-user").data("uid")) {
             $(`.right .chat[data-chat=${divId}]`).append(messageOfYou);
             nineScrollRight(divId);
-            $(`.person[data-chat=${divId}]`).find("span.time").addClass("message-time-realtime").
+            $(`.person[data-chat=${divId}]`).find("span.time").addClass("message-time-realtime");
          }
          
-
          // Step 03: Remove data at input: nothing to code :|
 
         // Step 04: Change data preview & time in lefside
-        $(`.person[data-chat=${divId}]`).find("span.time").html(moment(respone.message.createdAt).locale("vi").startOf("seconds").fromNow());
-        $(`.person[data-chat=${divId}]`).find("span.preview").addClass("message-time-realtime").html(emojione.toImage(respone.message.text))
+        $(`.person[data-chat=${divId}]`).find("span.time").html(moment(response.message.createdAt).locale("vi").startOf("seconds").fromNow());
+        $(`.person[data-chat=${divId}]`).find("span.preview").addClass("message-time-realtime").html(emojione.toImage(response.message.text))
 
         // Step 05: Move conversation to the top
         $(`.person[data-chat=${divId}]`).on("hieupencil.moveConversationToTheTop", function() {
@@ -114,9 +122,11 @@ $(document).ready(function() {
             $(this).closest("ul").prepend(dataToMove);
             $(this).off("hieupencil.moveConversationToTheTop");
         });
-        $(`.person[data-chat=${divId}]`).triger("hieupencil.moveConversationToTheTop");
+        $(`.person[data-chat=${divId}]`).trigger("hieupencil.moveConversationToTheTop");
 
-        // Step 06: Emit realtime: nothing to code :|
+        // Step 06: Emit real-time: nothing to code :|
+        // Step 07: Emit remove typing real-time: nothing to code :|
+        //Step 08: If this has typing, remove that immediate: nothing to code :|
 
     });
 });

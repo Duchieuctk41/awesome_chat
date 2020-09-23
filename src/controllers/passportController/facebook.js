@@ -57,7 +57,7 @@ let initPassportFacebook = () => {
             let getChatGroupIds = await ChatGroupModel.getChatGroupIdsByUser(user._id);
 
             user = user.toObject();
-            user.ChatGroupIds = getChatGroupIds;
+            user.chatGroupIds = getChatGroupIds;
             return done(null, user);
         } catch (error) {
             return done(error, null);
