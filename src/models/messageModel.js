@@ -77,5 +77,5 @@ const MESSAGE_TYPES = {
 module.exports = {
   model: mongoose.model("message", MessageSchema),
   conversationTypes: MESSAGE_CONVERSATION_TYPES,
-  messageType: MESSAGE_TYPES
+  messageTypes: MESSAGE_TYPES
 };
