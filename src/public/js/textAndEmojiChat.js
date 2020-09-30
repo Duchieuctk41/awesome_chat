@@ -25,7 +25,7 @@ function textAndEmojiChat(divId) {
                 };
 
                 // Step 01: Handle message data before show
-                let messageOfMe = $(`<div class="bubble me data-mess-id="${data.message._id}"></div>`);
+                let messageOfMe = $(`<div class="bubble me" data-mess-id="${data.message._id}"></div>`);
                 messageOfMe.text(data.message.text);
                 let convertEmojiMessage = emojione.toImage(messageOfMe.html());
 
@@ -84,7 +84,7 @@ $(document).ready(function() {
     socket.on("response-chat-text-emoji", function(response) {
         let divId = "";
         // Step 01: Handle message data before show
-        let messageOfYou = $(`<div class="bubble you data-mess-id="${response.message._id}"></div>`);
+        let messageOfYou = $(`<div class="bubble you" data-mess-id="${response.message._id}"></div>`);
         messageOfYou.text(response.message.text);
         let convertEmojiMessage = emojione.toImage(messageOfYou.html());
 
@@ -114,7 +114,7 @@ $(document).ready(function() {
 
         // Step 04: Change data preview & time in lefside
         $(`.person[data-chat=${divId}]`).find("span.time").html(moment(response.message.createdAt).locale("vi").startOf("seconds").fromNow());
-        $(`.person[data-chat=${divId}]`).find("span.preview").addClass("message-time-realtime").html(emojione.toImage(response.message.text))
+        $(`.person[data-chat=${divId}]`).find("span.preview").addClass("message-time-realtime").html(emojione.toImage(response.message.text));
 
         // Step 05: Move conversation to the top
         $(`.person[data-chat=${divId}]`).on("hieupencil.moveConversationToTheTop", function() {
