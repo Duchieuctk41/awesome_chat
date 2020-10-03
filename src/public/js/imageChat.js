@@ -1,6 +1,3 @@
-function bufferToBase64(buffer) {
-    return btoa( new Uint8Array(buffer).reduce((data, byte) => data + String.fromCharCode(byte), ""));
-}
 function imageChat(divId) {
     $(`#image-chat-${divId}`).unbind("change").on("change", function() {
         let fileData = $(this).prop("files")[0];
@@ -23,6 +20,7 @@ function imageChat(divId) {
         let messageformData = new FormData();
         messageformData.append("my-image-chat", fileData);
         messageformData.append("uid", targetId);
+        
 
         if ($(this).hasClass("chat-in-group")) {
             messageformData.append("isChatGroup", true);
@@ -86,7 +84,6 @@ function imageChat(divId) {
             },
             error: function(error) {
                 alertify.notify(error.responseText, "error", 7);
-                console.log(error);
             },
         });
     });
