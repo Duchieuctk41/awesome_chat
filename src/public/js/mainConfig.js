@@ -197,6 +197,9 @@ function changeScreenChat() {
 
     // Bật lắng nghe DOM cho việc chat tin nhắn tệp tin đính kèm
     attachmentChat(divId);
+
+    // Bật lắng nghe DOM cho việc gọi video
+    videoChat(divId);
   });
 }
 
@@ -249,5 +252,9 @@ $(document).ready(function() {
 
   // Click vào phần tử đầu tiên khi load trang web
   $("ul.people").find("a")[0].click();
+
+  $("video-chat-group").bind("click", function() {
+    alertify.notify("Tính năng nhóm hiện chưa được phát triển, bạn có thể  thử  với trò chuyện cá nhân.", "error", 7);
+  });
 
 });
