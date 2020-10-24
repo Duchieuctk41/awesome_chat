@@ -6,34 +6,35 @@ import request from "request";
 
 let getICETurnServe = () => {
   return new Promise(async (resolve, reject) => {
-    // Node Get ICE STUN and TURN list
-  let o = {
-    format: "urls"
-  };
+  //   // Node Get ICE STUN and TURN list
+  // let o = {
+  //   format: "urls"
+  // };
 
-  let bodyString = JSON.stringify(o);
+  // let bodyString = JSON.stringify(o);
   
-  let options = {
-    url: "https://global.xirsys.net/_turn/awesome-chat",
-    // host: "global.xirsys.net",
-    // path: "/_turn/awesome-chat",
-    method: "PUT",
-    headers: {
-        "Authorization": "Basic " + Buffer.from("duchieu:c93079be-15d0-11eb-8a2c-0242ac150002").toString("base64"),
-        "Content-Type": "application/json",
-        "Content-Length": bodyString.length
-    }
-  };
+  // let options = {
+  //   url: "https://global.xirsys.net/_turn/awesome-chat",
+  //   // host: "global.xirsys.net",
+  //   // path: "/_turn/awesome-chat",
+  //   method: "PUT",
+  //   headers: {
+  //       "Authorization": "Basic " + Buffer.from("duchieu:c93079be-15d0-11eb-8a2c-0242ac150002").toString("base64"),
+  //       "Content-Type": "application/json",
+  //       "Content-Length": bodyString.length
+  //   }
+  // };
 
-    // Call a request to get ICE list of turn server
-    request(options, (error, response, body) => {
-      if(error) {
-        console.log("Error when get ICE list." + error);
-        return reject(error);
-      }
-      let bodyJson = JSON.parse(body);
-      resolve(bodyJson.v.iceServers)
-    });
+  //   // Call a request to get ICE list of turn server
+  //   request(options, (error, response, body) => {
+  //     if(error) {
+  //       console.log("Error when get ICE list." + error);
+  //       return reject(error);
+  //     }
+  //     let bodyJson = JSON.parse(body);
+  //     resolve(bodyJson.v.iceServers);
+  //   });
+  resolve([]);
   });
 };
 

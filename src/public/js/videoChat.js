@@ -43,7 +43,6 @@ $(document).ready(function() {
         // debug: 3,
     }); 
 
-    console.log(peer);
     peer.on("open", function(peerId) {
         getPeerId = peerId;
     });
