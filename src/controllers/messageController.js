@@ -100,7 +100,6 @@ let storageAttachmentChat = multer.diskStorage({
     }
 });
 
-
 let attachmentMessageUploadFile = multer({
     storage: storageAttachmentChat,
     limits: {fileSize: app.attachment_message_limit_size}
