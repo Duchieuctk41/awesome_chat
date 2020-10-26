@@ -46,7 +46,7 @@ let getAllConversationItems = (currentUserId) => {
                     conversation.messages = _.reverse(getMessages);
                 } else {
                     let getMessages = await MessageModel.model.getMessagesInPersonal(currentUserId, conversation._id, LIMIT_MESSAGES_TAKEN);
-                    conversation.messages = _.reverse(getMessages);   
+                    conversation.messages = _.reverse(getMessages);  
                 }
                 
                 return conversation;
