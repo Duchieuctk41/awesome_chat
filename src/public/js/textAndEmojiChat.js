@@ -89,10 +89,11 @@ $(document).ready(function() {
         let convertEmojiMessage = emojione.toImage(messageOfYou.html());
 
         if (response.currentGroupId) {
-            let senderAvatar = `<img src="/images/users/${response.message.sender.avatar}" class="avatar-small" title="${data.message.sender.name}" />`;
+            let senderAvatar = `<img src="/images/users/${response.message.sender.avatar}" class="avatar-small" title="${response.message.sender.name}" />`;
             messageOfYou.html(`${senderAvatar} ${convertEmojiMessage}`);
 
             divId = response.currentGroupId;
+            
 
             if (response.currentUserId !== $("#dropdown-navbar-user").data("uid")) {
                 increaseNumberMessageGroup(divId);
