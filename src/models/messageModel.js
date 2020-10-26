@@ -53,13 +53,14 @@ MessageSchema.statics = {
       ]
     }).sort({"createdAt": -1}).limit(limit).exec();
   },
+
   /**
    * Get messages in group
-   * @param {string} senderId id of group chat
+   * @param {string} receiverId id of group chat
    * @param {number} limit 
    */
-  getMessagesInGroup(senderId, limit) {
-    return this.find({"senderId": senderId}).sort({"createdAt": -1}).limit(limit).exec();
+  getMessagesInGroup(receiverId, limit) {
+    return this.find({"receiverId": receiverId}).sort({"createdAt": -1}).limit(limit).exec();
   }
 };
 
