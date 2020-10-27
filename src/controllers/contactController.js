@@ -88,15 +88,15 @@ let removeRequestContactSent = async (req, res) => {
 };
 
 let readMoreContacts = async (req, res) => {
-  try {
-    // Get skip number from query param
-    let skipNumberContacts = +(req.query.skipNumber);
-    // Get more item
-    let newContactUsers = await contact.readMoreContacts(req.user._id, skipNumberContacts);
-    return res.status(200).send(newContactUsers); 
-} catch (error) {
-    return res.status(500).send(error);
-}
+    try {
+      // Get skip number from query param
+      let skipNumberContacts = +(req.query.skipNumber);
+      // Get more item
+      let newContactUsers = await contact.readMoreContacts(req.user._id, skipNumberContacts);
+      return res.status(200).send(newContactUsers); 
+  } catch (error) {
+      return res.status(500).send(error);
+  }
 };
 
 let readMoreContactsSent = async (req, res) => {
