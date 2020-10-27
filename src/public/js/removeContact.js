@@ -24,9 +24,32 @@ function removeContact() {
                 if(data.success) {
                     $("#contacts").find(`ul li[data-uid = ${targetId}]`).remove();
                     decreaseNumberNotifContact("count-contacts"); // js/calculateNotifiContact.js
-                    // later when performing the chat function, will delete continue in the chat section
                    
                     socket.emit("remove-contact", {contactId: targetId});
+
+                    // All steps handle chat after remove contact
+
+                    // Step 00: check active
+                    let checkActive = $("#all-chat").find(`li[data-chat = ${targetId}]`).hasClass("active");
+                    
+                    // Step 01: remove leftSide.ejs
+                    $("#all-chat").find(`ul a[href = "#uid_${targetId}"]`).remove();
+                    $("#user-chat").find(`ul a[href = "#uid_${targetId}"]`).remove();
+
+                    // Step 02: remove rightSide.ejs
+                    $("#screen-chat").find(`div#to_${targetId}`).remove();
+
+                    // Step 03: remove imageModal
+                    $("body").find(`div#imagesModal_${targetId}`).remove();
+
+                    // Step 04: remove attachmentModal
+                    $("body").find(`div#attachmentsModal_${targetId}`).remove();
+
+                    // Step 05: click first conversation
+                    if (checkActive) {
+                        // Click vào phần tử đầu tiên khi load trang web
+                        $("ul.people").find("a")[0].click();
+                    }
                 }
             }
         });
@@ -36,9 +59,32 @@ function removeContact() {
 
 
 socket.on("response-remove-contact", function(user) { 
-    $("#contacts").find(`ul li[data-uid] = ${user.id}`).remove();
+    $("#contacts").find(`ul li[data-uid = ${user.id}]`).remove();
     decreaseNumberNotifContact("count-contacts"); // js/calculateNotifiContact.js
-    // later when performing the chat function, will delete continue in the chat section 
+    
+    // All steps handle chat after remove contact
+
+    // Step 00: check active
+    let checkActive = $("#all-chat").find(`li[data-chat = ${user.id}]`).hasClass("active");
+    
+    // Step 01: remove leftSide.ejs
+    $("#all-chat").find(`ul a[href = "#uid_${user.id}"]`).remove();
+    $("#user-chat").find(`ul a[href = "#uid_${user.id}"]`).remove();
+
+    // Step 02: remove rightSide.ejs
+    $("#screen-chat").find(`div#to_${user.id}`).remove();
+
+    // Step 03: remove imageModal
+    $("body").find(`div#imagesModal_${user.id}`).remove();
+
+    // Step 04: remove attachmentModal
+    $("body").find(`div#attachmentsModal_${user.id}`).remove();
+
+    // Step 05: click first conversation
+    if (checkActive) {
+        // Click vào phần tử đầu tiên khi load trang web
+        $("ul.people").find("a")[0].click();
+    }
 });
 
 $(document).ready(function() {

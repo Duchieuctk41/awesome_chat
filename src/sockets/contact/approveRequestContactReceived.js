@@ -16,7 +16,7 @@ let approveRequestContactReceived = (io) => {
 
             };
             if (clients[data.contactId]) {
-                emitNotifyToArray(clients, data.contactId, io, "response-approve-request-contact-sent", currentUser);
+                emitNotifyToArray(clients, data.contactId, io, "response-approve-request-contact-received", currentUser);
             }
         });
 
