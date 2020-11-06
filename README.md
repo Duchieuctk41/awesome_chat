@@ -24,7 +24,7 @@ Author: Đức Hiếu
 
 Blog: htpps://facebook.com/duchieu.81699
 
-CV: https://cv.trungquandev.com/
+CV: https://duchieuctk41.github.io/duchieu.github.io/
 
 "A little bit of fragrance always clings to the hands that gives you roses!"
 
