@@ -1,5 +1,5 @@
 # awesome_chat
-ứng dụng chat giống với message
+ứng dụng chat - jquery
 
 # Awesome-Chat-Template-Frontend
 
