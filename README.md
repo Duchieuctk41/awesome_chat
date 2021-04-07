@@ -24,7 +24,7 @@ Author: Đức Hiếu
 
 Blog: htpps://facebook.com/duchieu.81699
 
-Deploy Heroku: http://awesome-chat-hieupencil.herokuapp.com/)
+Deploy Heroku: [Link](http://awesome-chat-hieupencil.herokuapp.com/)
 
 CV: [Link](https://duchieuctk41.github.io/duchieu.github.io/)
 
