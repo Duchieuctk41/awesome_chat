@@ -24,9 +24,9 @@ Author: Đức Hiếu
 
 Blog: htpps://facebook.com/duchieu.81699
 
-Deploy Heroku: http://awesome-chat-hieupencil.herokuapp.com/
+Deploy Heroku: http://awesome-chat-hieupencil.herokuapp.com/)
 
-CV: https://duchieuctk41.github.io/duchieu.github.io/
+CV: [Link](https://duchieuctk41.github.io/duchieu.github.io/)
 
 "A little bit of fragrance always clings to the hands that gives you roses!"
 
