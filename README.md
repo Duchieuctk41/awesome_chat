@@ -22,11 +22,11 @@ Thank you so much!
 
 Author: Đức Hiếu
 
-Blog: htpps://facebook.com/duchieu.81699
+Blog: [Link Facebook](https://www.facebook.com/pencil.816/)
 
-Deploy Heroku: [Link](http://awesome-chat-hieupencil.herokuapp.com/)
+Deploy Heroku: [Link Heroku](http://awesome-chat-hieupencil.herokuapp.com/)
 
-CV: [Link](https://duchieuctk41.github.io/duchieu.github.io/)
+CV: [Link CV](https://hieuisme.netlify.app/)
 
-"A little bit of fragrance always clings to the hands that gives you roses!"
+"I think still have a long way to go, but i'm definitely improving."
 
